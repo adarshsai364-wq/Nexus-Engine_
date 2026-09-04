@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus Enterprise | Symbiote Neural Engine & Cosmic Core</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="webgl-container"></div>
+
+    <div class="hud-container">
+        <div class="hud-header">
+            <h1>Nexus Neural Engine</h1>
+            <div class="status-badge">
+                <span class="status-dot"></span> Online
+            </div>
+        </div>
+        <p class="hud-desc">Adaptive organic nano-fibers mimicking liquid alloy physics with real-time stellar matrix integration.</p>
+        
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <span class="metric-label">Nodes</span>
+                <span class="metric-val" id="stat-nodes">9200</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-label">FPS</span>
+                <span class="metric-val" id="stat-fps">60</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-label">State</span>
+                <span class="metric-val" id="stat-state" style="color: #fff;">Stable</span>
+            </div>
+        </div>
+
+        <div class="interactive-tool-box">
+            <div class="control-row">
+                <span class="control-label">Warp Velocity</span>
+                <span class="control-label" id="warp-val">1.0x</span>
+            </div>
+            <input type="range" min="0.2" max="4.0" step="0.1" value="1.0" class="warp-slider" id="warp-slider" oninput="updateWarpSpeed(this.value)">
+        </div>
+
+        <div class="controls-group">
+            <div class="control-row">
+                <span class="control-label">Milky Way Matrix</span>
+                <button class="btn-toggle active" id="toggle-mesh" onclick="toggleMesh()">Enabled</button>
+            </div>
+            <div class="control-row">
+                <span class="control-label">Aggressive Surge</span>
+                <button class="btn-toggle" id="toggle-surge" onclick="toggleSurge()">Dormant</button>
+            </div>
+            <div class="control-row" style="margin-top: 4px;">
+                <span class="control-label">Alloy Chassis & Themes</span>
+            </div>
+            <div class="material-selector">
+                <button class="mat-btn active" onclick="switchMaterial('obsidian')">Obsidian</button>
+                <button class="mat-btn" onclick="switchMaterial('titanium')">Titanium</button>
+                <button class="mat-btn" onclick="switchMaterial('emerald')">Emerald</button>
+                <button class="mat-btn quantum-tab" onclick="switchMaterial('quantum')">⚡ Quantum</button>
+                <button class="mat-btn" onclick="toggleExplode()" style="grid-column: span 2;">Deconstruct Engine</button>
+            </div>
+        </div>
+
+        <button class="pulse-trigger-btn" onclick="triggerCosmicPulse()">
+            <span>✨ Trigger Supernova Pulse Wave</span>
+        </button>
+    </div>
+
+    <div class="interaction-banner">Move pointer to feed particle mass • Click anywhere for violent surge impulse</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+:root {
+    --bg-void: #020408;
+    --surface: rgba(10, 14, 23, 0.85);
+    --border: rgba(255, 255, 255, 0.08);
+    --success: #10b981;
+    --accent-crimson: #f43f5e;
+    --accent-gold: #d4af37;
+    --accent-quantum: #00f2fe;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-void);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 30%, rgba(2, 4, 8, 0.85) 90%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+#webgl-container {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.hud-container {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 10;
+    background: var(--surface);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 20px;
+    width: 410px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    pointer-events: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.hud-header h1 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #fff 40%, #64748b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 0.25rem 0.625rem;
+    border-radius: 99px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--success);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px var(--success); }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.hud-desc {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.metric-box {
+    background: rgba(2, 4, 8, 0.6);
+    border: 1px solid var(--border);
+    padding: 0.6rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.metric-label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.metric-val {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.interactive-tool-box {
+    background: rgba(2, 4, 8, 0.4);
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.75rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.warp-slider {
+    width: 100%;
+    margin-top: 6px;
+    accent-color: var(--accent-quantum);
+    cursor: pointer;
+}
+
+.controls-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.control-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.btn-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-main);
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-toggle.active {
+    background: #fff;
+    color: #020408;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.material-selector {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.mat-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mat-btn:hover, .mat-btn.active {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.mat-btn.quantum-tab {
+    border-color: rgba(0, 242, 254, 0.4);
+    color: var(--accent-quantum);
+    background: rgba(0, 242, 254, 0.05);
+}
+
+.mat-btn.quantum-tab:hover, .mat-btn.quantum-tab.active {
+    background: rgba(0, 242, 254, 0.15);
+    border-color: var(--accent-quantum);
+}
+
+.pulse-trigger-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    border: none;
+    color: #020408;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pulse-trigger-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 242, 254, 0.5);
+}
+
+.interaction-banner {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+}
